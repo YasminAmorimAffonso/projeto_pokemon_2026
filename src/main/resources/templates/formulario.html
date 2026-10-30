@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokédex</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<div class="container">
+
+  <H1 class="mt-5">Cadastro de novo Pokémons</H1>
+
+
+    <form th:action="${acao} == null ? '/pokemon' : ${acao}" method="post">
+
+      <div class="mb-3">
+
+        <label for="nome" class="form-label">Nome</label>
+        <input id="nome" name="nome" class="form-control" th:value="${acao} != null ? ${pokemon.nome}" type="text" placeholder="Nome do Pokémon" required>
+
+      </div>
+
+      <div class="mb-3">
+
+        <label for="altura" class="form-label">Altura</label>
+        <input id="altura" name="altura" class="form-control" th:value="${acao} != null ? ${pokemon.altura}" type="number" placeholder="Altura do Pokémon em Metros" step="0.01" required>
+
+      </div>
+
+      <div class="mb-3">
+
+        <label for="peso" class="form-label">Peso</label>
+        <input id="peso" name="peso" class="form-control" th:value="${acao} != null ? ${pokemon.peso}" type="number" placeholder="Peso do Pokémon em Quilos" step="0.01" required>
+
+      </div>
+
+      <div class="mb-3">
+
+        <label for="categoria" class="form-label">Categoria</label>
+        <input id="categoria" name="categoria" class="form-control" th:value="${acao} != null ? ${pokemon.categoria}" type="text" placeholder="Categoria do Pokémon" required>
+
+      </div>
+
+      <div class="mb-3">
+
+        <label for="dataDaCaptura" class="form-label">Data de Captura</label>
+        <input id="dataDaCaptura" name="dataDaCaptura" class="date" th:value="${acao} != null ? ${pokemon.dataDaCaptura}" type="date" placeholder="Data de Captura do Pokémon" required>
+
+      </div>
+
+      <div class="mb-3">
+
+        <label for="urlImagem" class="form-label">URL da Imagem</label>
+        <input id="urlImagem" name="urlImagem" class="form-control" th:value="${acao} != null ? ${pokemon.urlImagem}" type="text" placeholder="URL da Imagem do Pokémon">
+
+      </div>
+
+
+      <a href="/pokemon" class="btn btn-secondary">Cancelar</a>
+
+      <button type="submit" class="btn btn-success">Salvar</button>
+
+    </form>
+
+
+</div>
+
+</body>
+</html>

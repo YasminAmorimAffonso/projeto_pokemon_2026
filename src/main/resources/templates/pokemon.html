@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokédex</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <H1 class="mt-5">Lista de Pokémons</H1>
+
+
+        <a href="/pokemon/cadastrarPokemon" class="btn btn-primary mb-3">Cadastrar novo Pokémon</a>
+
+
+        <table class="table table-striped">
+
+            <thead>
+
+            <tr>
+
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Altura</th>
+                <th>Peso</th>
+                <th>Categoria</th>
+                <th>Data da Captura</th>
+                <th>Imagem</th>
+
+
+            </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            <tr th:each="pokemon : ${pokemons}">
+
+                <td th:text="${pokemon.codigo}"></td>
+                <td th:text="${pokemon.nome}"></td>
+                <td th:text="${#numbers.formatDecimal(pokemon.altura, 1, 'POINT', 2, 'COMMA')}"></td>
+                <td th:text="${#numbers.formatDecimal(pokemon.peso, 1, 'POINT', 2, 'COMMA')}"></td>
+                <td th:text="${pokemon.categoria}"></td>
+                <td th:text="${#temporals.format(pokemon.dataDaCaptura, 'dd/MM/yyyy')}"></td>
+                <td>
+
+                    <img th:src="${pokemon.urlImagem}" alt="Imagem do Pokémon" style=" width:200px; height:auto">
+
+                </td>
+
+
+                <td>
+
+                    <!--- link para editar pokémon --->
+                    <a th:href="@{/pokemon/editar/{id}(id=${pokemon.codigo})}" class="btn btn-warning btn-sm me-1">
+
+                        <i class="bi bi-pencil-square"></i> Editar
+
+                    </a>
+
+                    <!--- link para excluir pokémon --->
+
+                    <a th:href="@{/pokemon/excluir/{id}(id=${pokemon.codigo})}" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Deseja realmente excluir?');">
+
+                        <i class="bi bi-trash"></i> Excluir
+
+                    </a>
+
+                </td>
+
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</body>
+</html>
